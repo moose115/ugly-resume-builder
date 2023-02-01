@@ -4,14 +4,12 @@ dotenv.config();
 
 import { getUserByEmail, insertResume, insertUser } from './db/users';
 import bodyParser from 'body-parser';
+import path from 'path';
 
 const app: Express = express();
 
 app.use(bodyParser.json())
-
-app.get('/', (req, res) => {
-    res.send('<h1>Hello World!</h1>');
-});
+app.use(express.static('front/build'));
 
 app.post('/api/login', async (req, res) => {
     let user = await getUserByEmail(req.body.email);
@@ -27,6 +25,10 @@ app.put('/api/user', async (req, res) => {
     }
 });
 
-app.listen(4000, () => {
-    console.log('Server is running on port 3000');
+app.get('/*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../front/build/index.html'));
+});
+
+app.listen(process.env.PORT || 8080, () => {
+    console.log('Server started');
 });

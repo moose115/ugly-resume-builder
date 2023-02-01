@@ -28,7 +28,7 @@ function App() {
       console.log(email, data);
 
 
-      if (data) {
+      if (email && data) {
         nav('/resume');
       }
     };

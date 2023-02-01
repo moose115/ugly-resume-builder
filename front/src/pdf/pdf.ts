@@ -13,11 +13,11 @@ const docDefinition = (user: User) => ({
             style: 'header'
         },
         {
-            text: user.resume.name,
+            text: user.resume?.name,
             style: 'subheader'
         },
         {
-            text: user.resume.phone,
+            text: user.resume?.phone,
             style: 'subheader'
         },
         {
@@ -29,7 +29,7 @@ const docDefinition = (user: User) => ({
             style: 'header'
         },
         {
-            ul: user.resume.education.map((education: Education) => {
+            ul: user.resume?.education.map((education: Education) => {
                 return [
                     education.school,
                     education.program,
@@ -44,7 +44,7 @@ const docDefinition = (user: User) => ({
             style: 'header'
         },
         {
-            ul: user.resume.experience.map((experience: Experience) => {
+            ul: user.resume?.experience.map((experience: Experience) => {
                 return [
                     experience.company,
                     experience.position,
@@ -59,7 +59,7 @@ const docDefinition = (user: User) => ({
             style: 'header'
         },
         {
-            ul: user.resume.skills.map((skill: Skill) => {
+            ul: user.resume?.skills.map((skill: Skill) => {
                 return [
                     skill.name
                 ]
