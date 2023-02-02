@@ -17,53 +17,51 @@ const docDefinition = (user: User) => ({
             style: 'subheader'
         },
         {
-            text: user.resume?.phone,
-            style: 'subheader'
-        },
-        {
-            text: user.email,
-            style: 'subheader'
+            columns: [
+                {
+                    text: user.email,
+                    style: 'subheader'
+                },
+                {
+                    text: user.resume?.phone,
+                    style: 'subheader'
+                },
+            ]
         },
         {
             text: 'Education',
             style: 'header'
         },
-        {
-            ul: user.resume?.education.map((education: Education) => {
-                return [
-                    education.school,
-                    education.program,
-                    education.startDate,
-                    education.endDate,
-                    education.gpa
+        ...user.resume?.education.map((education: Education) => ({
+            layout: 'noBorders',
+            table: {
+                widths: ['*', '*', '*', '*', '*'],
+                body: [
+                    [education.school, education.program, education.startDate, education.endDate],
+                    ['GPA ' + education.gpa, '', '', '']
                 ]
-            })
-        },
+            },
+        })) || [],
         {
             text: 'Experience',
             style: 'header'
         },
-        {
-            ul: user.resume?.experience.map((experience: Experience) => {
-                return [
-                    experience.company,
-                    experience.position,
-                    experience.startDate,
-                    experience.endDate,
-                    experience.description
+        ...user.resume?.experience.map((experience: Experience) => ({
+            layout: 'noBorders',
+            table: {
+                widths: ['*', '*', '*', '*', '*'],
+                body: [
+                    [experience.company, experience.position, experience.startDate, experience.endDate],
+                    [experience.description, '', '', '']
                 ]
-            })
-        },
+            },
+        })) || [],
         {
             text: 'Skills',
             style: 'header'
         },
         {
-            ul: user.resume?.skills.map((skill: Skill) => {
-                return [
-                    skill.name
-                ]
-            })
+            text: user.resume?.skills.map((skill: Skill) => skill.name).join(', ')
         }
     ],
     styles: {

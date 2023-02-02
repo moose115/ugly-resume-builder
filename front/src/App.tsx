@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import './App.css';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import Home from './pages/Home';
 import Header from './components/Header';
 import { UserContext } from './context/UserContext';
 import { User } from './types/User';
 import Resume from './pages/Resume';
+import styles from './App.module.css';
 
 function App() {
   const [user, setUser] = useState<User | null>(null);
@@ -37,9 +37,9 @@ function App() {
 
   return (
     <UserContext.Provider value={{ user, setUser }}>
-      <div className="App">
-        <Header />
-        <main>
+      <div className={styles.app}>
+        <Header className={styles.header} />
+        <main className={styles.main} >
           <Routes>
             <Route path="/">
               <Route index element={<Home />} />
